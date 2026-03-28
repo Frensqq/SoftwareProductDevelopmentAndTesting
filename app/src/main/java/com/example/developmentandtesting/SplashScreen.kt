@@ -1,2 +1,84 @@
 package com.example.developmentandtesting
 
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
+import androidx.compose.foundation.border
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.draw.scale
+import androidx.compose.ui.draw.shadow
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalConfiguration
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextDecoration
+import com.example.developmentandtesting.ui.theme.Black
+import com.example.developmentandtesting.ui.theme.Typography
+import com.example.developmentandtesting.ui.theme.White
+import com.example.developmentandtesting.ui.theme.backgroundGradient
+import java.nio.file.WatchEvent
+
+
+//Сплэш скрин - экран открывающийся на пару секунд при запуске приложения
+@Composable
+fun SplashScreenCustom(){
+    Column(modifier = Modifier
+        .fillMaxSize()
+        //backgroundGradient() градиент созданный в ui.theme Color.kt
+        .background(backgroundGradient())
+        //Центрирование элементов
+        , horizontalAlignment = Alignment.CenterHorizontally
+        , verticalArrangement = Arrangement.Center) {
+
+        // размер Box - половина меньшей сотроны экрана
+        val configuration = LocalConfiguration.current
+        val screenWidth = configuration.screenWidthDp.dp
+        val screenHeight = configuration.screenHeightDp.dp
+        val squareSize = minOf(screenWidth, screenHeight) / 2
+
+        Box(modifier = Modifier.shadow(
+            elevation = 30.dp,
+            shape = CircleShape,
+            clip = false
+            )
+            .clip(CircleShape)
+            .background(White).size(squareSize),
+            contentAlignment = Alignment.Center,  )  {
+
+            Image(painter = painterResource(R.drawable.splash),
+                modifier = Modifier.scale(0.8f),
+                contentDescription = null, contentScale = ContentScale.FillHeight)
+
+        }
+
+        Spacer(modifier = Modifier.height(25.dp))
+
+        Text(text = "Расчет сторон теругольника", style = Typography().Title1,
+            textAlign = TextAlign.Center,
+
+            color = White)
+
+    }
+
+}
+
+
+
+@Preview
+@Composable
+fun PreviewSplashScreenCustom(){
+    SplashScreenCustom()
+}
