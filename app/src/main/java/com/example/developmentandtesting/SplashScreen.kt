@@ -72,7 +72,6 @@ fun SplashScreenCustom(){
             color = White)
 
     }
-
 }
 
 
