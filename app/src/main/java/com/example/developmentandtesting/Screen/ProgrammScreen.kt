@@ -29,69 +29,83 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.example.developmentandtesting.Components.DialogWindow
+import com.example.developmentandtesting.Components.ErrorWindow
 import com.example.developmentandtesting.Components.InputStr
 import com.example.developmentandtesting.R
 import com.example.developmentandtesting.Components.UniversalButton
-import com.example.developmentandtesting.Logic.TypeDefinition
+import com.example.developmentandtesting.Logic.defineTriangleType
 import com.example.developmentandtesting.ui.theme.Typography
 import com.example.developmentandtesting.ui.theme.White
 import com.example.developmentandtesting.ui.theme.purpleGradient
 
 
 @Composable
-fun ProgramScreen(){
+fun ProgramScreen() {
 
-    val letters = listOf<Int>(
+    val letters = listOf(
         R.drawable.lettera,
         R.drawable.letterb,
         R.drawable.letterc
     )
 
+    var inputs by remember { mutableStateOf(arrayOf("", "", "")) }
+    var result by remember { mutableStateOf<Int?>(null) }
+    var error by remember { mutableStateOf<String?>(null) }
 
-
-    var inputs by remember { mutableStateOf(arrayOf("","","")) }
-    var start by remember { mutableStateOf(false) }
-
-    LaunchedEffect(start) {
-        if (start){
-            //TypeDefinition(inputs[0],inputs[1],inputs[2])
-        }
-    }
-
-    Column(modifier = Modifier.fillMaxSize()
-        .background(purpleGradient),
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(purpleGradient),
         horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.SpaceBetween) {
+        verticalArrangement = Arrangement.SpaceBetween
+    ) {
+
         Text(
-            "Введите размеры сторон!", style = Typography().Title1,
+            "Введите размеры сторон!",
+            style = Typography().Title1,
             color = White,
-            textAlign = TextAlign.Center, modifier = Modifier.padding(top = 35.dp)
+            textAlign = TextAlign.Center,
+            modifier = Modifier.padding(top = 35.dp)
         )
-        Column(modifier = Modifier.fillMaxHeight(0.7f),
+
+        Column(
+            modifier = Modifier.fillMaxHeight(0.7f),
             verticalArrangement = Arrangement.spacedBy(8.dp),
-            horizontalAlignment = Alignment.CenterHorizontally) {
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+
             Image(
                 painter = painterResource(R.drawable.traengles),
                 contentDescription = null,
-                modifier = Modifier.padding(20.dp).widthIn(max = 400.dp).fillMaxWidth(),
+                modifier = Modifier
+                    .padding(20.dp)
+                    .widthIn(max = 400.dp)
+                    .fillMaxWidth(),
                 contentScale = ContentScale.FillWidth
             )
+
             LazyVerticalGrid(
                 columns = GridCells.Adaptive(minSize = 250.dp),
                 modifier = Modifier.fillMaxWidth(),
                 verticalArrangement = Arrangement.spacedBy(15.dp),
                 horizontalArrangement = Arrangement.Center
-            )
-            {
-
+            ) {
                 items(3) {
                     Row(
-                        modifier = Modifier.widthIn(max = 250.dp)
+                        modifier = Modifier
+                            .widthIn(max = 250.dp)
                             .padding(horizontal = 30.dp),
                         horizontalArrangement = Arrangement.SpaceBetween,
                         verticalAlignment = Alignment.CenterVertically
                     ) {
-                        Text("Сторона ${it + 1}: ", style = Typography().Title2, color = White)
+
+                        Text(
+                            "Сторона ${it + 1}: ",
+                            style = Typography().Title2,
+                            color = White
+                        )
+
                         InputStr(
                             inputs[it],
                             { newValue ->
@@ -99,20 +113,64 @@ fun ProgramScreen(){
                                     if (i == it) newValue else v
                                 }.toTypedArray()
                             },
-                            "0", letters[it]
+                            "0",
+                            letters[it]
                         )
                     }
                 }
             }
         }
 
-        val state = !inputs[0].isEmpty() && !inputs[1].isEmpty() && !inputs[2].isEmpty()
+        val enabled = inputs.all { it.isNotEmpty() }
 
-        Box(modifier = Modifier.padding(20.dp).fillMaxWidth(), contentAlignment = Alignment.Center) {
-            UniversalButton("Проверить", {start = true}, state)
+        Box(
+            modifier = Modifier
+                .padding(20.dp)
+                .fillMaxWidth(),
+            contentAlignment = Alignment.Center
+        ) {
+
+            UniversalButton("Проверить", {
+
+                try {
+                    val a = inputs[0].toDouble()
+                    val b = inputs[1].toDouble()
+                    val c = inputs[2].toDouble()
+
+                    val type = defineTriangleType(a, b, c)
+
+                    if (type == -1) {
+                        error = "Треугольник не существует"
+                    } else {
+                        result = type
+                    }
+
+                } catch (e: Exception) {
+                    error = "Введите корректные числа"
+                }
+
+            }, enabled)
+        }
+
+    }
+    Box(modifier = Modifier.fillMaxSize(),
+        contentAlignment = Alignment.Center) {
+        if (result != null) {
+            DialogWindow(result!!) {
+                result = null
+            }
+        }
+        
+        if (error != null) {
+            ErrorWindow("Ошибка", error!!) {
+                error = null
+            }
         }
     }
 }
+
+
+
 
 @Preview
 @Composable
