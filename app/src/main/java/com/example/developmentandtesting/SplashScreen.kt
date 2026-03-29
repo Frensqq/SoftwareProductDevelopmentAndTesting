@@ -29,21 +29,18 @@ import com.example.developmentandtesting.ui.theme.Black
 import com.example.developmentandtesting.ui.theme.Typography
 import com.example.developmentandtesting.ui.theme.White
 import com.example.developmentandtesting.ui.theme.backgroundGradient
+import com.example.developmentandtesting.ui.theme.purpleGradient
 import java.nio.file.WatchEvent
 
 
-//Сплэш скрин - экран открывающийся на пару секунд при запуске приложения
 @Composable
 fun SplashScreenCustom(){
     Column(modifier = Modifier
         .fillMaxSize()
-        //backgroundGradient() градиент созданный в ui.theme Color.kt
-        .background(backgroundGradient())
-        //Центрирование элементов
+        .background(purpleGradient)
         , horizontalAlignment = Alignment.CenterHorizontally
         , verticalArrangement = Arrangement.Center) {
 
-        // размер Box - половина меньшей сотроны экрана
         val configuration = LocalConfiguration.current
         val screenWidth = configuration.screenWidthDp.dp
         val screenHeight = configuration.screenHeightDp.dp

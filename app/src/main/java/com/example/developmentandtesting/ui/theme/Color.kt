@@ -1,12 +1,13 @@
 package com.example.developmentandtesting.ui.theme
 
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 
-val Accent = Color(0xff9d81ba)
-val AccentInactive = Color(0xff63D4B0)
+val Accent = Color(0xff782bda)
+val AccentInactive = Color(0xffb39ae6)
 val Black = Color(0xff000000)
 val White = Color(0xffffffff)
 val Error = Color(0xffFD3535)
@@ -37,7 +38,7 @@ val purpleGradient = Brush.linearGradient(
 @Composable
 fun colorsOutlinedTextField() = OutlinedTextFieldDefaults.colors(
     unfocusedTextColor = Black,
-    unfocusedBorderColor = InputStr,
+    unfocusedBorderColor = AccentInactive,
     unfocusedPlaceholderColor = Placeholder,
     unfocusedContainerColor = InputBg,
 
@@ -60,4 +61,12 @@ val blueGradient = Brush.linearGradient(
         Color(0xffB4D5FF),
         Color(0xff60A6FD)
     )
+)
+
+@Composable
+fun colorButton() = ButtonDefaults.buttonColors(
+    disabledContentColor = InputStr,
+    disabledContainerColor = AccentInactive,
+    containerColor = Accent,
+    contentColor = White
 )
