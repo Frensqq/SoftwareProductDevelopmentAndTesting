@@ -17,6 +17,7 @@ import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -31,6 +32,7 @@ import androidx.compose.ui.unit.dp
 import com.example.developmentandtesting.Components.InputStr
 import com.example.developmentandtesting.R
 import com.example.developmentandtesting.Components.UniversalButton
+import com.example.developmentandtesting.Logic.TypeDefinition
 import com.example.developmentandtesting.ui.theme.Typography
 import com.example.developmentandtesting.ui.theme.White
 import com.example.developmentandtesting.ui.theme.purpleGradient
@@ -45,7 +47,16 @@ fun ProgramScreen(){
         R.drawable.letterc
     )
 
+
+
     var inputs by remember { mutableStateOf(arrayOf("","","")) }
+    var start by remember { mutableStateOf(false) }
+
+    LaunchedEffect(start) {
+        if (start){
+            //TypeDefinition(inputs[0],inputs[1],inputs[2])
+        }
+    }
 
     Column(modifier = Modifier.fillMaxSize()
         .background(purpleGradient),
@@ -98,7 +109,7 @@ fun ProgramScreen(){
         val state = !inputs[0].isEmpty() && !inputs[1].isEmpty() && !inputs[2].isEmpty()
 
         Box(modifier = Modifier.padding(20.dp).fillMaxWidth(), contentAlignment = Alignment.Center) {
-            UniversalButton("Проверить", {}, state)
+            UniversalButton("Проверить", {start = true}, state)
         }
     }
 }

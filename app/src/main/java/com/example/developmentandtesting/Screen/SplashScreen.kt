@@ -23,14 +23,18 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
+import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavHostController
 import com.example.developmentandtesting.R
+import com.example.developmentandtesting.ViewModel.SplashViewModel
 import com.example.developmentandtesting.ui.theme.Typography
 import com.example.developmentandtesting.ui.theme.White
 import com.example.developmentandtesting.ui.theme.purpleGradient
 
 
 @Composable
-fun SplashScreenCustom(){
+fun SplashScreenCustom(Navcontroller: NavHostController,viewModel: SplashViewModel = viewModel()){
+    viewModel.launch(Navcontroller)
     Column(modifier = Modifier
         .fillMaxSize()
         .background(purpleGradient)
@@ -69,8 +73,8 @@ fun SplashScreenCustom(){
 
 
 
-@Preview
-@Composable
-fun PreviewSplashScreenCustom(){
-    SplashScreenCustom()
-}
+//@Preview
+//@Composable
+//fun PreviewSplashScreenCustom(){
+//    SplashScreenCustom()
+//}
