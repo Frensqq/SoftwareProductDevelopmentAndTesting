@@ -34,7 +34,8 @@ import com.example.developmentandtesting.Components.ErrorWindow
 import com.example.developmentandtesting.Components.InputStr
 import com.example.developmentandtesting.R
 import com.example.developmentandtesting.Components.UniversalButton
-import com.example.developmentandtesting.Logic.defineTriangleType
+import com.example.developmentandtesting.Logic.TriangleResult
+import com.example.developmentandtesting.Logic.defineTriangle
 import com.example.developmentandtesting.ui.theme.Typography
 import com.example.developmentandtesting.ui.theme.White
 import com.example.developmentandtesting.ui.theme.purpleGradient
@@ -50,8 +51,10 @@ fun ProgramScreen() {
     )
 
     var inputs by remember { mutableStateOf(arrayOf("", "", "")) }
+
     var result by remember { mutableStateOf<Int?>(null) }
-    var error by remember { mutableStateOf<String?>(null) }
+    var errorTitle by remember { mutableStateOf<String?>(null) }
+    var errorDescription by remember { mutableStateOf<String?>(null) }
 
     Column(
         modifier = Modifier
@@ -100,7 +103,7 @@ fun ProgramScreen() {
                         verticalAlignment = Alignment.CenterVertically
                     ) {
 
-                        Text(
+                    Text(
                             "Сторона ${it + 1}: ",
                             style = Typography().Title2,
                             color = White
@@ -132,26 +135,25 @@ fun ProgramScreen() {
 
             UniversalButton("Проверить", {
 
-                try {
-                    val a = inputs[0].toDouble()
-                    val b = inputs[1].toDouble()
-                    val c = inputs[2].toDouble()
+                val resultData = defineTriangle(
+                    inputs[0],
+                    inputs[1],
+                    inputs[2]
+                )
 
-                    val type = defineTriangleType(a, b, c)
-
-                    if (type == -1) {
-                        error = "Треугольник не существует"
-                    } else {
-                        result = type
+                when (resultData) {
+                    is TriangleResult.Success -> {
+                        result = resultData.type
                     }
 
-                } catch (e: Exception) {
-                    error = "Введите корректные числа"
+                    is TriangleResult.Error -> {
+                        errorTitle = resultData.title
+                        errorDescription = resultData.description
+                    }
                 }
 
             }, enabled)
         }
-
     }
     Box(modifier = Modifier.fillMaxSize(),
         contentAlignment = Alignment.Center) {
@@ -160,14 +162,17 @@ fun ProgramScreen() {
                 result = null
             }
         }
-        
-        if (error != null) {
-            ErrorWindow("Ошибка", error!!) {
-                error = null
+
+        if (errorTitle != null && errorDescription != null) {
+            ErrorWindow(errorTitle!!, errorDescription!!) {
+                errorTitle = null
+                errorDescription = null
             }
         }
     }
+
 }
+
 
 
 

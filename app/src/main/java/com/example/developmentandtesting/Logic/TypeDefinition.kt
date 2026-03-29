@@ -1,13 +1,66 @@
 package com.example.developmentandtesting.Logic
 
-fun defineTriangleType(a: Double, b: Double, c: Double): Int {
-    // Проверка существования треугольника
-    if (a <= 0 || b <= 0 || c <= 0) return -1
-    if (a + b <= c || a + c <= b || b + c <= a) return -1
+sealed class TriangleResult {
+    data class Success(val type: Int) : TriangleResult()
+    data class Error(val title: String, val description: String) : TriangleResult()
+}
 
-    return when {
-        a == b && b == c -> 2 // равносторонний
-        a == b || b == c || a == c -> 1 // равнобедренный
-        else -> 0 // разносторонний
+fun defineTriangle(a: String, b: String, c: String): TriangleResult {
+
+    val aD: Double
+    val bD: Double
+    val cD: Double
+
+    // ❌ Проверка преобразования
+    try {
+        aD = a.toDouble()
+    } catch (e: Exception) {
+        return TriangleResult.Error(
+            "Ошибка ввода",
+            "Сторона A должна быть числом"
+        )
     }
+
+    try {
+        bD = b.toDouble()
+    } catch (e: Exception) {
+        return TriangleResult.Error(
+            "Ошибка ввода",
+            "Сторона B должна быть числом"
+        )
+    }
+
+    try {
+        cD = c.toDouble()
+    } catch (e: Exception) {
+        return TriangleResult.Error(
+            "Ошибка ввода",
+            "Сторона C должна быть числом"
+        )
+    }
+
+    // ❌ Ноль или отрицательные
+    if (aD <= 0 || bD <= 0 || cD <= 0) {
+        return TriangleResult.Error(
+            "Некорректные значения",
+            "Все стороны должны быть больше 0"
+        )
+    }
+
+    // ❌ Теорема треугольника
+    if (aD + bD <= cD || aD + cD <= bD || bD + cD <= aD) {
+        return TriangleResult.Error(
+            "Треугольник не существует",
+            "Сумма любых двух сторон должна быть больше третьей"
+        )
+    }
+
+    // ✅ Определение типа
+    val type = when {
+        aD == bD && bD == cD -> 2
+        aD == bD || bD == cD || aD == cD -> 1
+        else -> 0
+    }
+
+    return TriangleResult.Success(type)
 }
