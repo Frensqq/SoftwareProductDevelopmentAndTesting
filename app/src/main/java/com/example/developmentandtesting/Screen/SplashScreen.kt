@@ -1,8 +1,7 @@
-package com.example.developmentandtesting
+package com.example.developmentandtesting.Screen
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -24,13 +23,10 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.text.style.TextDecoration
-import com.example.developmentandtesting.ui.theme.Black
+import com.example.developmentandtesting.R
 import com.example.developmentandtesting.ui.theme.Typography
 import com.example.developmentandtesting.ui.theme.White
-import com.example.developmentandtesting.ui.theme.backgroundGradient
 import com.example.developmentandtesting.ui.theme.purpleGradient
-import java.nio.file.WatchEvent
 
 
 @Composable
