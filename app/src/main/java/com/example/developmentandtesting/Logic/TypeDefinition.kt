@@ -7,12 +7,12 @@ sealed class TriangleResult {
 
 fun defineTriangle(a: String, b: String, c: String): TriangleResult {
 
-    val aD: Double
-    val bD: Double
-    val cD: Double
+    val aD: Int
+    val bD: Int
+    val cD: Int
 
     try {
-        aD = a.toDouble()
+        aD = a.toInt()
     } catch (e: Exception) {
         return TriangleResult.Error(
             "Ошибка ввода",
@@ -21,7 +21,7 @@ fun defineTriangle(a: String, b: String, c: String): TriangleResult {
     }
 
     try {
-        bD = b.toDouble()
+        bD = b.toInt()
     } catch (e: Exception) {
         return TriangleResult.Error(
             "Ошибка ввода",
@@ -30,7 +30,7 @@ fun defineTriangle(a: String, b: String, c: String): TriangleResult {
     }
 
     try {
-        cD = c.toDouble()
+        cD = c.toInt()
     } catch (e: Exception) {
         return TriangleResult.Error(
             "Ошибка ввода",
@@ -38,7 +38,6 @@ fun defineTriangle(a: String, b: String, c: String): TriangleResult {
         )
     }
 
-    // ❌ Ноль или отрицательные
     if (aD <= 0 || bD <= 0 || cD <= 0) {
         return TriangleResult.Error(
             "Некорректные значения",
@@ -46,7 +45,6 @@ fun defineTriangle(a: String, b: String, c: String): TriangleResult {
         )
     }
 
-    // ❌ Теорема треугольника
     if (aD + bD <= cD || aD + cD <= bD || bD + cD <= aD) {
         return TriangleResult.Error(
             "Треугольник не существует",
@@ -54,7 +52,6 @@ fun defineTriangle(a: String, b: String, c: String): TriangleResult {
         )
     }
 
-    // ✅ Определение типа
     val type = when {
         aD == bD && bD == cD -> 2
         aD == bD || bD == cD || aD == cD -> 1
