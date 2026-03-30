@@ -16,7 +16,7 @@ fun defineTriangle(a: String, b: String, c: String): TriangleResult {
     } catch (e: Exception) {
         return TriangleResult.Error(
             "Ошибка ввода",
-            "Сторона A должна быть числом"
+            "Сторона A должна быть целым числом"
         )
     }
 
@@ -25,7 +25,7 @@ fun defineTriangle(a: String, b: String, c: String): TriangleResult {
     } catch (e: Exception) {
         return TriangleResult.Error(
             "Ошибка ввода",
-            "Сторона B должна быть числом"
+            "Сторона B должна быть целым числом"
         )
     }
 
@@ -34,7 +34,7 @@ fun defineTriangle(a: String, b: String, c: String): TriangleResult {
     } catch (e: Exception) {
         return TriangleResult.Error(
             "Ошибка ввода",
-            "Сторона C должна быть числом"
+            "Сторона C должна быть целым числом"
         )
     }
     if (aD <= 0 || bD <= 0 || cD <= 0) {

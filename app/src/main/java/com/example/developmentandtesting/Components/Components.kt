@@ -47,7 +47,7 @@ fun InputStr(value: String, onChangeValue: (String) -> Unit, text: String, icon:
                 onChangeValue(it)
             } } ,
         colors = colorsOutlinedTextField(),
-        modifier = Modifier.width(100.dp).height(50.dp),
+        modifier = Modifier.width(120.dp).height(50.dp),
         shape = RoundedCornerShape(15.dp),
         leadingIcon = {
             Icon(
