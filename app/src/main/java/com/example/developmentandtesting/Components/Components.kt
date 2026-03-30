@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Button
@@ -78,8 +79,7 @@ fun UniversalButton(text: String, onClick: () -> Unit, state: Boolean){
         enabled = state,
         shape = RoundedCornerShape(15.dp),
         border = if (state) BorderStroke(2.dp, AccentInactive) else null,
-        modifier = Modifier.height(60.dp)
-            .fillMaxWidth(0.5f),
+        modifier = Modifier.height(60.dp).widthIn(min = 200.dp),
         colors = colorButton()
     ) {
         Text(text = text, style = Typography().Title2, color = White)
