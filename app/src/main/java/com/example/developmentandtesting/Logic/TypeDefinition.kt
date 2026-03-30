@@ -11,7 +11,6 @@ fun defineTriangle(a: String, b: String, c: String): TriangleResult {
     val bD: Double
     val cD: Double
 
-    // ❌ Проверка преобразования
     try {
         aD = a.toDouble()
     } catch (e: Exception) {

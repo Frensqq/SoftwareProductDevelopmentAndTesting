@@ -91,15 +91,16 @@ fun UniversalButton(text: String, onClick: () -> Unit, state: Boolean){
 
 @Composable
 fun ExitButton(onClick: (Boolean) -> Unit, isError: Boolean){
-    Box(modifier = Modifier.fillMaxWidth().height(50.dp).background(if (isError) Error else Accent ),
+    Box(modifier = Modifier.fillMaxWidth().height(50.dp).background(if (isError) Error else Accent )
+        .clickable {
+        onClick(false)
+    },
         contentAlignment = Alignment.Center
     ) {
         Text(
             "Закрыть", style = Typography().Text, textAlign = TextAlign.Center,
             color = White,
-            modifier = Modifier.clickable {
-                onClick(false)
-            })
+            )
     }
 }
 

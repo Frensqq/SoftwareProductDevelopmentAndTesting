@@ -1,5 +1,6 @@
 package com.example.developmentandtesting.Screen
 
+import android.app.Activity
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -33,7 +34,7 @@ import com.example.developmentandtesting.ui.theme.purpleGradient
 
 
 @Composable
-fun SplashScreenCustom(Navcontroller: NavHostController,viewModel: SplashViewModel = viewModel()){
+fun SplashScreenCustom(Navcontroller: NavHostController, viewModel: SplashViewModel = viewModel()){
     viewModel.launch(Navcontroller)
     Column(modifier = Modifier
         .fillMaxSize()

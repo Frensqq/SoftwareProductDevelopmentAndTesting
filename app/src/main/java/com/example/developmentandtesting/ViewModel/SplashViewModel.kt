@@ -1,5 +1,7 @@
 package com.example.developmentandtesting.ViewModel
 
+import android.app.Activity
+import android.content.pm.ActivityInfo
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -16,4 +18,5 @@ class SplashViewModel(): ViewModel() {
             controller.navigate(NavigationRoutes.MAIN)
         }
     }
+
 }
