@@ -1,7 +1,6 @@
 package com.example.developmentandtesting.Components
 
 
-import android.R
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -9,8 +8,6 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.heightIn
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -46,7 +43,7 @@ fun InputStr(value: String, onChangeValue: (String) -> Unit, text: String, icon:
     OutlinedTextField(
         value = value,
         onValueChange = {
-            if (it.length <= 3) {
+            if (it.length <= 4) {
                 onChangeValue(it)
             } } ,
         colors = colorsOutlinedTextField(),

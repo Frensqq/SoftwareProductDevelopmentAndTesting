@@ -37,7 +37,6 @@ fun defineTriangle(a: String, b: String, c: String): TriangleResult {
             "Сторона C должна быть числом"
         )
     }
-
     if (aD <= 0 || bD <= 0 || cD <= 0) {
         return TriangleResult.Error(
             "Некорректные значения",
