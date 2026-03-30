@@ -57,6 +57,7 @@ fun DialogWindow(State: Int, onClick: (Boolean) -> Unit){
             .background(White)
             .border(1.dp, Accent, RoundedCornerShape(15.dp)),
                 horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.spacedBy(10.dp)
     ) {
         Text("Успешно!", style = Typography().Title2, modifier = Modifier.padding(top= 5.dp))
         Box(modifier = Modifier.padding(top= 5.dp).height(1.dp).fillMaxWidth().background(Accent))
@@ -83,6 +84,8 @@ fun ErrorWindow(error: String, description: String, onClick: (Boolean) -> Unit){
             .background(White)
             .border(1.dp, Error, RoundedCornerShape(15.dp)),
             horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.spacedBy(10.dp)
+
 
     ) {
         Text("Ошибка!", style = Typography().Title2, modifier = Modifier.padding(top= 5.dp))
@@ -92,8 +95,6 @@ fun ErrorWindow(error: String, description: String, onClick: (Boolean) -> Unit){
         Text(error, style = Typography().Text, textAlign = TextAlign.Center)
 
         Text(description, style = Typography().Text, textAlign = TextAlign.Center, color = Placeholder)
-
-        Box(modifier = Modifier.padding(top= 5.dp).height(1.dp).fillMaxWidth().background(Error))
 
         ExitButton(onClick, true)
     }
